@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'product',
     'collection',
     'cart',
+    'panel',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,20 +73,32 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'users.Account'
 WSGI_APPLICATION = 'devstone.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'USER': 'postgres',
+#         'NAME': 'devstone',
+#         'PASSWORD' : 'a159753++',
+#         'HOST': 'localhost'
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
-        'NAME': 'devstone',
-        'PASSWORD' : 'a159753++',
-        'HOST': 'localhost'
-    }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite',
+    },
+    # 'admin': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': 'admin',
+    # }
 }
 
 
