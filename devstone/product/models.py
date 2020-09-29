@@ -7,7 +7,6 @@ class Product(models.Model):
     name            = models.CharField(max_length=100)
     description     = models.TextField()
     video_url       = models.URLField(null=True, blank=True)
-    price           = models.FloatField()
     meta            = models.CharField(max_length=100,default=" ")
 
     def fillMeta(self):
@@ -24,16 +23,25 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-    
 
 class ProductDetail(models.Model):
     product         = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="product")
-    size            = models.CharField(max_length=15,blank=True,default=-1)
-    color           = models.CharField(max_length=50,blank=True,default=-1)
+    first_price     = models.FloatField(blank=True, null=True, default=-1) #optional, must be bigger/equal than/to price
+    price           = models.FloatField()
+    stock           = models.IntegerField()
+
+    variant         = models.CharField(max_length=50,blank=True,default=-1)
+    variable        = models.CharField(max_length=50,blank=True,default=-1)
+
 
     def __str__(self):
-        return f"{self.size} {self.color} {self.product.name}"
-    
+        return f"{self.variable} {self.product.name}"
+
+class ProductMedia(models.Model):
+    product         = models.ForeignKey(ProductDetail,on_delete=models.CASCADE,related_name="product_media")
+    # image           = models.ImageField()
+    image_url       = models.URLField()
+
 
 class Tag(models.Model):
     product         = models.ForeignKey(ProductDetail,on_delete=models.CASCADE,related_name="productdetail")
