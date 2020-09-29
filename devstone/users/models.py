@@ -43,7 +43,7 @@ class Account(AbstractBaseUser):
     phone                   = models.CharField(verbose_name="phone",max_length=30,blank=True,null=True)
     date_joined             = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login              = models.DateTimeField(verbose_name='last login', auto_now=True)
-    date_of_birth           = models.DateTimeField(verbose_name='last login',blank=True,null=True)
+    date_of_birth           = models.DateField(verbose_name='last login',blank=True,null=True)
     """
         Gender : 
             -1: Belirtmek istemiyorum
@@ -66,8 +66,8 @@ class Account(AbstractBaseUser):
     def has_perm(self,perm,obj=None):
         return self.is_admin
 
-    # def has_module_perms(self, app_label):
-    #     return True
+    def has_module_perms(self, app_label):
+        return True
 
     def __str__(self):
         return self.email

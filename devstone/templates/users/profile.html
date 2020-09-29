@@ -1,0 +1,135 @@
+{% extends "users/index.html" %}
+
+{% block title %} Kullanici Bilgilerim {% endblock title %} 
+
+
+{% block myaccountbody %}
+<div class="col sm-5">
+<form action="{% url 'users:profile' %}" method="post">
+  {% csrf_token %}
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="email"
+      name="email"
+      placeholder="{{ user.email }}"
+      disabled
+    />
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          name="first_name"
+          value="{% if user.first_name %}{{ user.first_name }}{% else %}Isim{%endif%}"
+          required
+        />
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          name="last_name"
+          value="{% if user.last_name %}{{ user.last_name }}{% else %}Soyisim{%endif%}"
+          required
+        />
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+  
+    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Cep Telefonu</label>
+    <input
+      class="form-control"
+      type="phone"
+      name="phone"
+      value="{% if user.phone %}{{ user.phone }}{% else %}{%endif%}"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label class="my-1 mr-2" for="inlineFormCustomSelectPref"
+      >Dogum Tarihi</label
+    >
+    <input
+      class="form-control"
+      type="date"
+      name="date_of_birth"
+      value="{% if user.date_of_birth %}{{ user.date_of_birth.year }}-{{ xmonth }}-{{ user.date_of_birth.day }}{% else %}2011-08-19{%endif%}"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Cinsiyet</label>
+
+    <select id="disabledSelect" name="gender" class="form-control" value={{user.gender}}>
+      
+        {%if user.gender == -1 %}
+            <option value="-1" selected> Belirtmek Istemiyorum </option>
+            <option value="1">Kadin</option>
+            <option value="0">Erkek</option>
+        {%elif user.gender == 0 %}
+            <option value="-1"> Belirtmek Istemiyorum </option>
+            <option value="1">Kadin</option>
+            <option value="0"selected>Erkek</option>
+        {%elif user.gender == 1 %}
+            <option value="-1"> Belirtmek Istemiyorum </option>
+            <option value="1" selected>Kadin</option>
+            <option value="0">Erkek</option>
+        {% else %}
+            <option value="-1"> Belirtmek Istemiyorum </option>
+            <option value="1">Kadin</option>
+            <option value="0">Erkek</option>
+        {%endif%}
+      
+      
+      
+    </select>
+  </div>
+  <input class="btn btn-primary" type="submit" value="Guncelle" />
+</form>
+</div>
+
+<div class="col sm-5">
+
+<form action="{% url 'users:changePass' %}" method="post">
+  {% csrf_token %}
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="password"
+      name="prevpassword"
+      placeholder="Eski Şifre"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="password"
+      name="password"
+      placeholder="Yeni Şifre"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="password"
+      name="confirmation"
+      placeholder="Yeni Şifre (Tekrar)"
+      required
+    />
+  </div>
+  {% if message%}
+   <div>{{ message }}</div>
+  {% endif %}
+  <input class="btn btn-primary" type="submit" value="Guncelle" />
+</form>
+</div>
+{% endblock myaccountbody %}
