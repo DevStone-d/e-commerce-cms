@@ -41,27 +41,49 @@
   </div>
   
   <div class="form-group">
-  
+    {% if user.phone %}
     <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Cep Telefonu</label>
     <input
       class="form-control"
       type="phone"
       name="phone"
-      value="{% if user.phone %}{{ user.phone }}{% else %}{%endif%}"
+      
+      value="{{ user.phone }}"
       required
     />
+    {% else %}
+    <input
+      class="form-control"
+      type="phone"
+      name="phone"
+      placeholder="Cep Telefonu"
+      required
+    />
+    {%endif%}
   </div>
   <div class="form-group">
+  
     <label class="my-1 mr-2" for="inlineFormCustomSelectPref"
       >Dogum Tarihi</label
     >
+    {% if user.date_of_birth %}
     <input
       class="form-control"
       type="date"
       name="date_of_birth"
-      value="{% if user.date_of_birth %}{{ user.date_of_birth.year }}-{{ xmonth }}-{{ user.date_of_birth.day }}{% else %}2011-08-19{%endif%}"
+      value="{{ user.date_of_birth.year }}-{{ xmonth }}-{{ user.date_of_birth.day }}"
       required
     />
+    {% else %}
+    <input
+      class="form-control"
+      type="date"
+      name="date_of_birth"
+      
+      required
+    />
+    {%endif%}
+
   </div>
   <div class="form-group">
     <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Cinsiyet</label>

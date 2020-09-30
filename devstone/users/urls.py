@@ -10,4 +10,6 @@ urlpatterns = [
     path("reviews", views.reviews, name="reviews"),
     path("adress", views.adress, name="adress"),
     path("changePass", views.changePass, name="changePass"),
+    path("adressdelete/<int:id>", views.adressdelete, name="adressdelete"),
+    
 ]

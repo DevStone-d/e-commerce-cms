@@ -5,8 +5,46 @@
 
 {% block myaccountbody %}
 
-<div class="col sm-10">
+<div class="col-9">
+    {% if useradress %}
+    <div class="row" style="margin-bottom: 15px;">
+    <ul class="list-group">
+        {% for adress in useradress %}
+        <li class="list-group-item" >{{adress}} <a class="btn btn-outline-light text-dark" href="{% url 'users:adressdelete' adress.id %}" > <i class="fas fa-trash"></i></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif  %}
+    <div class="row">
+        <form action="{% url 'users:adress' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" name="adress_first_name" placeholder="İsim" required>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="adress_last_name" placeholder="Soyisim" required>
+                </div>
+            </div>
+            </div>
+            
+            <div class="form-group">
+                <input class="form-control" type="phone" name="adress_phone" placeholder="Cep Telefonu" required>
+            </div>
     
+            <div class="form-group">
+                <input class="form-control" type="text" name="city" placeholder="Şehir" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="country" placeholder="Ülke" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control text-box" type="text" name="adresss" placeholder="Adres" required>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Adres Ekle">
+        </form>
+    </div>
 </div>
 
 

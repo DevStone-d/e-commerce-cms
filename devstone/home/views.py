@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from users.models import Account
@@ -19,16 +20,13 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("home:index"))
         else:
-            print(email)
-            print(password)
-            
-            print(user)
-            return render(request, "home/index.html", {
-                "message": "Invalid username and/or password."
+            return render(request, "home/login.html", {
+                "message": "Invalid email and/or password."
             })
     else:
-        return render(request, "home/index.html")
+        return render(request, "home/login.html")
 
+@login_required(login_url='home:login')
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("home:index"))

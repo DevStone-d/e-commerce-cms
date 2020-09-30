@@ -81,6 +81,10 @@ class Adress(models.Model):
     country                 = models.CharField(max_length=100)
     adresss                 = models.TextField(max_length=100)
 
+    def __str__(self):
+        return f"{self.adress_first_name} {self.adress_last_name} - {self.adresss} {self.city}/{self.country}"
+    
+
 class Order(models.Model):
     customer                = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="buyer")
     address                 = models.ForeignKey(Adress,on_delete=models.CASCADE,related_name="adress")
