@@ -7,19 +7,19 @@ class Product(models.Model):
     name            = models.CharField(max_length=100)
     description     = models.TextField()
     video_url       = models.URLField(null=True, blank=True)
-    meta            = models.CharField(max_length=100,default=" ")
+    meta_url        = models.CharField(max_length=100,default=" ", unique=True)
 
     def fillMeta(self):
         metaname        = str(self.name).casefold().replace(" ","-")
-        self.meta       = metaname
+        self.meta_url   = metaname
 
-        return self.meta
+        return self.meta_url
 
     def newMeta(self,newmeta):
-        newmeta     = newmeta.strip().casefold().replace(" ","-")
-        self.meta   = newmeta
+        newmeta         = newmeta.strip().casefold().replace(" ","-")
+        self.meta_url   = newmeta
 
-        return self.meta
+        return self.meta_url
 
     def __str__(self):
         return self.name
