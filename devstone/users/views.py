@@ -98,7 +98,10 @@ def changePass(request):
         confirmation = request.POST["confirmation"]
         is_valid = authenticate(request, username=request.user.email, password=prevpassword)
         currentUser = Account.objects.get(pk=request.user.id)
-        xmonth = int(currentUser.date_of_birth.month)
+        try : 
+            xmonth = int(currentUser.date_of_birth.month)
+        except :
+            xmonth = 0
 
         if xmonth < 10:
             xmonth = "0" + str(xmonth)
