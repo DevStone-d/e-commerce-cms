@@ -1,3 +1,5 @@
+{% extends "layout.html" %}
+
 <!--
     # item.product.name
     # item.product.description
@@ -10,3 +12,19 @@
     # item_img.image_url
     # item_tag.tag 
 -->
+
+{% block body %}
+
+{{item.product.name}}
+{{item.product.description}}
+{{item.product.video_url}}
+{{item.first_price}}
+{{item.price}}
+{{item.stock}}
+{{item.variant}}
+{{item.variable}}
+{{item_img.image_url}}
+{{item_tag.tag}}
+
+
+{% endblock body %}
