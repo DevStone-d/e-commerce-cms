@@ -1,0 +1,35 @@
+{% extends "layout.html" %} {% block body %}
+
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for productmedia in itemsMedia %} {% for item in productmedia %}
+        <div class="col mb-4">
+            <div class="card">
+                  
+                <a href="{% url 'products:product' item.product.product.meta_url %}">
+                    <img src="{{ item.image_url }}" class="card-img-top" alt="..." /></a>
+
+                <div class="card-body">
+                    <h6 class="card-title">{{item.product.product.name}}</h6>
+                    {% if item.product.first_price %}
+                    <div class="row">
+                        <div class="col sm-5">
+                        <p class="card-text text-danger font-weight-bold"><s>{{item.product.first_price}} </s>₺</p>
+                    </div>
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col sm-5">
+                        <p class="card-text text-success font-weight-bolder">{{item.product.price}} ₺</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock body %}

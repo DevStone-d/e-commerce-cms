@@ -37,12 +37,14 @@ class ProductDetail(models.Model):
     def __str__(self):
         return f"{self.variable} {self.product.name}"
 
+
 class ProductMedia(models.Model):
     product         = models.ForeignKey(ProductDetail,on_delete=models.CASCADE,related_name="product_media")
     # image           = models.ImageField()
     image_url       = models.URLField()
 
-
+    def __str__(self):
+        return f"{self.image_url}"
 class Tag(models.Model):
     product         = models.ForeignKey(ProductDetail,on_delete=models.CASCADE,related_name="productdetail")
     tag             = models.CharField(max_length=100)
